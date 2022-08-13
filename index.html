@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+    <title>琉クイズ</title>
+
+    <style>
+      html {
+        font-family: sans-serif;
+      }
+
+      body {
+        width: 50%;
+        max-width: 800px;
+        min-width: 480px;
+        margin: 0 auto;
+      }
+
+      .form input[type="number"] {
+        width: 200px;
+      }
+
+      .lastResult {
+        color: white;
+        padding: 3px;
+      }
+
+      .subject {
+        margin-top: 30px;
+        margin-bottom: 45px;
+      }
+
+      .q_num {
+        font-size: 20px;
+        margin-bottom: 18px;
+      }
+
+      .quest {
+        margin-bottom: 35px;
+        margin-left: 15px;
+      }
+
+      .answer {
+        margin-top: 45px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>琉からの挑戦状</h1>
+
+    <div class="subject">
+      <p>
+        これからランダムで問題が出題されるよ！<br />
+        君は何問正解できるかな？
+      </p>
+    </div>
+
+    <!-- VueApp -->
+    <div class="form" id="app">
+      <div class="q_num">
+        問題
+      </div>
+      <div id="questionArea" class="quest">
+        {{ question }}
+      </dev>
+
+      <div class="answer">
+        <p>
+          答えを入力してね
+        </p>
+        <input v-model="user">
+        <button @click="checkAnswer">決定</button>
+        <p>{{ passFail }}</p>
+        <div v-if="isPass">
+          <button @click="reload">次の問題</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let data = {
+        count: 1,
+        question: "???",
+        answer: "",
+        user: "",
+        passFail: "",
+        isPass: false,
+      }
+      let app = new Vue({
+        el: "#app",
+        data: data,
+        methods: {
+          checkAnswer() {
+            if(this.user === this.answer) {
+              this.passFail = "正解！！";
+              this.isPass = true;
+            }
+            else {
+              this.passFail = "不正解...";
+              this.isPass = false;
+            }
+          },
+          reload() {
+            window.location.reload();
+          }
+        },
+      });
+
+      // 問題
+      const questions = [
+        "3 + 4 は何でしょう？",
+        "4 × 11 は何でしょう？",
+        "92 + 8 - 11 は何でしょう？",
+      ];
+
+      // 答え
+      const answers = [
+        "7",
+        "44",
+        "89"
+      ];
+
+      // 3 までのランダムな数字を作成する
+      let randomNumber = Math.floor(Math.random() * 3);
+
+      app.$data.question = questions[randomNumber];
+      app.$data.answer = answers[randomNumber];
+    </script>
+  </body>
+</html>
