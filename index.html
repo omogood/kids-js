@@ -64,7 +64,7 @@
         問題 {{ questionNum }} 問目
       </div>
       <div id="questionArea" class="quest">
-        {{ question }}
+        {{ question }} は何でしょう？
       </dev>
 
       <div class="answer">
@@ -106,7 +106,7 @@
           },
           nextQuestion() {
             // 次の問題をセット
-            let randomNumber = Math.floor(Math.random() * 3);
+            let randomNumber = Math.floor(Math.random() * 20);
             this.question = questions[randomNumber];
             this.answer = answers[randomNumber];
             this.questionNum += 1;
@@ -120,20 +120,54 @@
 
       // 問題
       const questions = [
-        "3 + 4 は何でしょう？",
-        "4 × 11 は何でしょう？",
-        "92 + 8 - 11 は何でしょう？",
+        "3 + 4",
+        "4 × 11",
+        "92 + 8 - 11",
+        "21 − 1",
+        "50 - 5 × 2",
+        "101 × 2 + 35",
+        "9 × 9 × 9",
+        "5 × 5 × 4",
+        "30 × 3 + 10",
+        "200030 + 30",
+        "50 + 1 + 51",
+        "4 × 4 × 2",
+        "3 + 3 + 3 + 8",
+        "3 + 9 + 4",
+        "50 × 2 + 3",
+        "5 × (3 + 9 + 2)",
+        "5 × 3 + 1",
+        "9分の1 + 3分の1 ",
+        "3分の1 + 3分の1 ",
+        "9 × 2 × 3 × 3",
       ];
 
       // 答え
       const answers = [
         "7",
         "44",
-        "89"
+        "89",
+        "20",
+        "90",
+        "237",
+        "729",
+        "100",
+        "100",
+        "200060",
+        "102",
+        "32",
+        "17",
+        "16",
+        "103",
+        "70",
+        "16",
+        "9分の4",
+        "3分の2",
+        "162",
       ];
 
-      // 3 までのランダムな数字を作成する
-      let randomNumber = Math.floor(Math.random() * 3);
+      // 20 までのランダムな数字を作成する
+      let randomNumber = Math.floor(Math.random() * 20);
 
       app.$data.question = questions[randomNumber];
       app.$data.answer = answers[randomNumber];
