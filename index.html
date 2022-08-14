@@ -61,7 +61,7 @@
     <!-- VueApp -->
     <div class="form" id="app">
       <div class="q_num">
-        問題
+        問題 {{ questionNum }} 問目
       </div>
       <div id="questionArea" class="quest">
         {{ question }}
@@ -75,7 +75,7 @@
         <button @click="checkAnswer">決定</button>
         <p>{{ passFail }}</p>
         <div v-if="isPass">
-          <button @click="reload">次の問題</button>
+          <button @click="nextQuestion">次の問題</button>
         </div>
       </div>
     </div>
@@ -88,6 +88,7 @@
         user: "",
         passFail: "",
         isPass: false,
+        questionNum: 1,
       }
       let app = new Vue({
         el: "#app",
@@ -103,8 +104,16 @@
               this.isPass = false;
             }
           },
-          reload() {
-            window.location.reload();
+          nextQuestion() {
+            // 次の問題をセット
+            let randomNumber = Math.floor(Math.random() * 3);
+            this.question = questions[randomNumber];
+            this.answer = answers[randomNumber];
+            this.questionNum += 1;
+            // 表示をクリア
+            this.passFail = "";
+            this.user = "";
+            this.isPass = false;
           }
         },
       });
